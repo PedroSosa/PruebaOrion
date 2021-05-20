@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { AlertsService } from './../../services/alerts.service';
 import { AuthService } from './../../services/auth.service';
 import { Employee } from './../../interfaces/employee';
@@ -32,7 +33,8 @@ export class EmployeesComponent implements OnInit {
     private builder: FormBuilder,
     private db: DatabaseService,
     private auth: AuthService,
-    private _alert: AlertsService
+    private _alert: AlertsService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -183,5 +185,11 @@ export class EmployeesComponent implements OnInit {
       .catch((error) => {
         this._alert.error(error.message, 'Error');
       });
+  }
+
+  logOut() {
+    this.auth.logOut().then(() => {
+      this.router.navigate(['/login']);
+    });
   }
 }

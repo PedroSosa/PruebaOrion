@@ -62,6 +62,26 @@
   );
 }
 
+.logout {
+  width: 10%;
+  height: 40px;
+  position: absolute;
+  right: 10px;
+  top: 60px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  cursor: pointer;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: rgb(18, 164, 216);
+  background: linear-gradient(
+    45deg,
+    rgba(18, 164, 216, 1) 0%,
+    rgba(120, 97, 168, 1) 100%
+  );
+}
+
 .dt {
   margin-top: 30px;
   padding: 0 5%;
