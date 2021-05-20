@@ -1,0 +1,67 @@
+.content {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.login-content {
+  width: 50%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+}
+
+.input-login {
+  width: 50%;
+  margin: 5px;
+  border: 1px solid rgb(207, 207, 207);
+  border-radius: 3px;
+  height: 30px;
+}
+
+.forgot {
+  margin-top: 10px;
+  margin-right: -120px;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.login {
+  width: 30%;
+  height: 40px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  cursor: pointer;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: rgb(18, 164, 216);
+  background: linear-gradient(
+    45deg,
+    rgba(18, 164, 216, 1) 0%,
+    rgba(120, 97, 168, 1) 100%
+  );
+}
+
+.register-border {
+  width: 30%;
+  margin: 5px;
+  background: linear-gradient(
+    45deg,
+    rgba(18, 164, 216, 1) 0%,
+    rgba(120, 97, 168, 1) 100%
+  );
+  border-radius: 4px;
+  padding: 1px;
+  .register {
+    width: 100%;
+    cursor: pointer;
+    height: 40px;
+    border: none;
+    border-radius: 4px;
+    color: #000;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background: #fff;
+  }
+}

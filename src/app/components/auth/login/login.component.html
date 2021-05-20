@@ -1,0 +1,24 @@
+<div class="content">
+  <div class="login-content">
+    <h1>Iniciar Sesión</h1>
+    <input
+      class="input-login"
+      [(ngModel)]="email"
+      placeholder="Correo Eléctronico"
+      type="text"
+    />
+    <input
+      class="input-login"
+      [(ngModel)]="password"
+      placeholder="Contraseña"
+      type="password"
+    />
+    <p class="forgot" routerLink="/forgot">Olvidaste tu contraseña?</p>
+    <button type="button" class="login" (click)="login()">Iniciar</button>
+    <div class="register-border">
+      <button type="button" routerLink="/register" class="register">
+        Registrarme
+      </button>
+    </div>
+  </div>
+</div>

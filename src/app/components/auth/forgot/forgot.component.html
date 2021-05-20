@@ -1,0 +1,14 @@
+<div class="content">
+  <div class="login-content">
+    <h1>Ingrese un correo para recuperar la contraseña</h1>
+    <input
+      class="input-login"
+      [(ngModel)]="email"
+      placeholder="Correo Eléctronico"
+      type="text"
+    />
+    <button type="button" class="forgot" (click)="forgot()">
+      Enviar correo de recuperación
+    </button>
+  </div>
+</div>

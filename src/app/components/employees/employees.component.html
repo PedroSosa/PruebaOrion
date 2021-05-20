@@ -1,0 +1,292 @@
+<ngx-smart-modal #myModal identifier="myModal" [formGroup]="employeeForm">
+  <h1>Nuevo empleado</h1>
+  <div class="row">
+    <div class="cont">
+      <input type="text" formControlName="name" placeholder="Nombres" />
+      <p
+        class="help-block"
+        *ngIf="
+          employeeForm.get('name').hasError('required') &&
+          employeeForm.get('name').touched
+        "
+      >
+        Debe ingresar un Nombre
+      </p>
+    </div>
+    <div class="cont">
+      <input type="text" formControlName="lastName" placeholder="Apellidos" />
+      <p
+        class="help-block"
+        *ngIf="
+          employeeForm.get('lastName').hasError('required') &&
+          employeeForm.get('lastName').touched
+        "
+      >
+        Debe ingresar un Apellido
+      </p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="cont">
+      <input type="text" formControlName="phone" placeholder="telefono" />
+      <p
+        class="help-block"
+        *ngIf="
+          employeeForm.get('phone').hasError('required') &&
+          employeeForm.get('phone').touched
+        "
+      >
+        Debe ingresar un numero teléfonico
+      </p>
+      <p
+        class="help-block"
+        *ngIf="
+          employeeForm.get('phone').hasError('maxlength') &&
+          employeeForm.get('phone').touched
+        "
+      >
+        El teléfono no debe superar los 10 caraceres
+      </p>
+      <p
+        class="help-block"
+        *ngIf="
+          employeeForm.get('phone').hasError('minlength') &&
+          employeeForm.get('phone').touched
+        "
+      >
+        El teléfono no debe ser menor a los 10 caraceres
+      </p>
+    </div>
+    <div class="cont">
+      <input type="text" formControlName="id" placeholder="Cedula" />
+      <p
+        class="help-block"
+        *ngIf="
+          employeeForm.get('id').hasError('required') &&
+          employeeForm.get('id').touched
+        "
+      >
+        Debe ingresar un numero de cédula
+      </p>
+      <p
+        class="help-block"
+        *ngIf="
+          employeeForm.get('id').hasError('maxlength') &&
+          employeeForm.get('id').touched
+        "
+      >
+        La cédula no debe superar los 11 caraceres
+      </p>
+      <p
+        class="help-block"
+        *ngIf="
+          employeeForm.get('id').hasError('minlength') &&
+          employeeForm.get('id').touched
+        "
+      >
+        La cédula no debe ser menor a los 11 caraceres
+      </p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="cont">
+      <input
+        type="date"
+        formControlName="dob"
+        placeholder="Fecha de nacimiento"
+      />
+      <p
+        class="help-block"
+        *ngIf="
+          employeeForm.get('dob').hasError('required') &&
+          employeeForm.get('dob').touched
+        "
+      >
+        Debe seleccionar una fecha de nacimiento
+      </p>
+    </div>
+  </div>
+
+  <button
+    [disabled]="employeeForm.invalid"
+    [ngStyle]="employeeForm.invalid ? { opacity: '0.5' } : {}"
+    class="save"
+    (click)="saveEmployee()"
+  >
+    Crear nuevo empleado
+  </button>
+</ngx-smart-modal>
+
+<ngx-smart-modal #details identifier="details">
+  <h1>
+    {{ employees[employeeSelected]?.name }}
+    {{ employees[employeeSelected]?.lastName }}
+  </h1>
+  <div class="row">
+    <div class="cont">
+      <h3>Cedula</h3>
+      <h4>{{ employees[employeeSelected]?.id }}</h4>
+    </div>
+    <div class="cont">
+      <h3>Telefono</h3>
+      <h4>{{ employees[employeeSelected]?.phone }}</h4>
+    </div>
+  </div>
+  <div class="row">
+    <div class="cont">
+      <h3>Fecha de nacimiento</h3>
+      <h4>{{ employees[employeeSelected]?.dob }}</h4>
+    </div>
+    <div class="cont">
+      <!-- <h3>Telefono</h3>
+      <h4>{{employees[employeeSelected].phone}}</h4> -->
+    </div>
+  </div>
+  <h1>Direcciones</h1>
+  <div class="row dir" *ngFor="let address of employeeSelectedAddress">
+    <h2 class="close" (click)="deleteAddress(address.id)">x</h2>
+    <h2 class="edit" (click)="openEdit(address.id)">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        fill="currentColor"
+        class="bi bi-pencil-square"
+        viewBox="0 0 16 16"
+      >
+        <path
+          d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"
+        />
+        <path
+          fill-rule="evenodd"
+          d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"
+        />
+      </svg>
+    </h2>
+    <div class="cont">
+      <h2>
+        {{ address.alias }}
+      </h2>
+      <h4>{{ address.addressLine }}</h4>
+    </div>
+    <div class="cont">
+      <h4>
+        {{ address.city }}
+      </h4>
+      <h4>{{ address.sector }}</h4>
+    </div>
+  </div>
+  <button
+    type="button"
+    class="save"
+    (click)="ngxSmartModalService.getModal('address').open()"
+  >
+    Agregar nueva dirección
+  </button>
+</ngx-smart-modal>
+<ngx-smart-modal #address identifier="address" [formGroup]="addressForm">
+  <h1>Nueva dirección</h1>
+  <div class="row">
+    <div class="cont">
+      <input type="text" formControlName="alias" placeholder="Alias" />
+      <p
+        class="help-block"
+        *ngIf="
+          addressForm.get('alias').hasError('required') &&
+          addressForm.get('alias').touched
+        "
+      >
+        Debe ingresar un Alias
+      </p>
+    </div>
+    <div class="cont">
+      <input
+        type="text"
+        formControlName="addressLine"
+        placeholder="Dirección"
+      />
+      <p
+        class="help-block"
+        *ngIf="
+          addressForm.get('addressLine').hasError('required') &&
+          addressForm.get('addressLine').touched
+        "
+      >
+        Debe ingresar una Dirección
+      </p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="cont">
+      <input type="text" formControlName="city" placeholder="Ciudad" />
+      <p
+        class="help-block"
+        *ngIf="
+          addressForm.get('city').hasError('required') &&
+          addressForm.get('city').touched
+        "
+      >
+        Debe ingresar una Ciudad
+      </p>
+    </div>
+    <div class="cont">
+      <input type="text" formControlName="sector" placeholder="Sector" />
+      <p
+        class="help-block"
+        *ngIf="
+          addressForm.get('sector').hasError('required') &&
+          addressForm.get('sector').touched
+        "
+      >
+        Debe ingresar un Sector
+      </p>
+    </div>
+  </div>
+
+  <button
+    [disabled]="addressForm.invalid"
+    [ngStyle]="addressForm.invalid ? { opacity: '0.5' } : {}"
+    class="save"
+    (click)="saveAddress()"
+    *ngIf="!update; else change"
+  >
+    Guardar dirección
+  </button>
+  <ng-template #change>
+    <button
+      [disabled]="addressForm.invalid"
+      [ngStyle]="addressForm.invalid ? { opacity: '0.5' } : {}"
+      class="save"
+      (click)="updateAddress()"
+    >
+      actualizar dirección
+    </button>
+  </ng-template>
+</ngx-smart-modal>
+<button class="save" (click)="ngxSmartModalService.getModal('myModal').open()">
+  Crear nuevo empleado
+</button>
+
+<div class="dt">
+  <div class="table">
+    <div class="row">
+      <div class="header">ID</div>
+      <div class="header">Nombre</div>
+      <div class="header">Apellidos</div>
+      <div class="header">Teléfono</div>
+      <div class="header">Fecha de nacimiento</div>
+    </div>
+    <div
+      class="row"
+      *ngFor="let emp of employees; let i = index"
+      (click)="openAddress(i)"
+    >
+      <div class="cell">{{ emp.id }}</div>
+      <div class="cell">{{ emp.name }}</div>
+      <div class="cell">{{ emp.lastName }}</div>
+      <div class="cell">{{ emp.phone }}</div>
+      <div class="cell">{{ emp.dob }}</div>
+    </div>
+  </div>
+  <!-- <ngx-datatable [rows]="employees" [columns]="columns"> </ngx-datatable> -->
+</div>

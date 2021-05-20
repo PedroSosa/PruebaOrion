@@ -1,0 +1,82 @@
+<div class="content">
+  <div class="login-content" [formGroup]="registerForm">
+    <h1>Crear una cuenta</h1>
+    <input
+      class="input-login"
+      formControlName="name"
+      placeholder="Nombre"
+      type="text"
+    />
+    <p
+      class="help-block"
+      *ngIf="
+        registerForm.get('name').hasError('required') &&
+        registerForm.get('name').touched
+      "
+    >
+      Debe ingresar un nombre
+    </p>
+    <input
+      class="input-login"
+      formControlName="email"
+      placeholder="Correo Eléctronico"
+      type="text"
+    />
+    <p
+      class="help-block"
+      *ngIf="
+        registerForm.get('email').hasError('required') &&
+        registerForm.get('email').touched
+      "
+    >
+      Debe ingresar un correo eléctronico
+    </p>
+    <p
+      class="help-block"
+      *ngIf="
+        registerForm.get('email').hasError('pattern') &&
+        registerForm.get('email').touched
+      "
+    >
+      Debe ingresar un correo eléctronico válido
+    </p>
+    <input
+      class="input-login"
+      formControlName="password"
+      placeholder="Contraseña"
+      type="password"
+    />
+    <p
+      class="help-block"
+      *ngIf="
+        registerForm.get('password').hasError('required') &&
+        registerForm.get('password').touched
+      "
+    >
+      Debe ingresar una contraseña
+    </p>
+    <input
+      class="input-login"
+      formControlName="confirm"
+      placeholder="Confirmar Contraseña"
+      type="password"
+    />
+    <p
+      class="help-block"
+      *ngIf="
+        registerForm.get('password').value != registerForm.get('confirm').value
+      "
+    >
+      Las contraseñas no coindicen
+    </p>
+    <button
+      type="button"
+      (click)="register()"
+      [disabled]="registerForm.invalid"
+      [ngStyle]="registerForm.invalid ? { opacity: '0.5' } : {}"
+      class="register"
+    >
+      Registrarme
+    </button>
+  </div>
+</div>
